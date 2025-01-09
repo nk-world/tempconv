@@ -18,24 +18,46 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             CalcResult();
         }
 
+        //private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+        //        (e.KeyChar != '.'))
+        //    {
+        //        e.Handled = true;
+        //    }
+        //}
+
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
+            if (char.IsControl(e.KeyChar))
             {
-                e.Handled = true;
+                return;
             }
+
+            if (char.IsDigit(e.KeyChar))
+            {
+                return;
+            }
+
+            if (e.KeyChar == '.' && !((sender as TextBox).Text.Contains(".")))
+            {
+                return;
+            }
+
+            if (e.KeyChar == '-' && (sender as TextBox).SelectionStart == 0 &&
+                !((sender as TextBox).Text.Contains("-")))
+            {
+                return;
+            }
+
+            e.Handled = true;
         }
+
 
         private void CalcResult()
         {
