@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,9 +41,7 @@ namespace WindowsFormsApp1
         {
             if (!double.TryParse(textBox1.Text, out double temp))
             {
-                ResultC.Text = "-";
-                ResultF.Text = "-";
-                ResultK.Text = "-";
+                ResultC.Text = ResultF.Text = ResultK.Text = "-";
                 return;
             }
 
@@ -82,6 +81,11 @@ namespace WindowsFormsApp1
         private void ResultK_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(ResultK.Text);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/nk-world/tempconv");
         }
     }
 }
